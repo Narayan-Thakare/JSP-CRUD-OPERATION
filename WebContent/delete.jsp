@@ -12,37 +12,25 @@
 </head>
 <body>
 
-
 <%
 
-String fn=request.getParameter("first_name");
-String ln=request.getParameter("last_name");
-String cn=request.getParameter("number");
+String dd=request.getParameter("name");
+
 
 
 
 Class.forName("com.mysql.cj.jdbc.Driver");
 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/serv","root","abc123");
-PreparedStatement stmt=con.prepareStatement("Insert into serv.ser values(?,?,?)");
-stmt.setString(1,fn);
-stmt.setString(2, ln);
-stmt.setString(3, cn);
-int a=stmt.executeUpdate();
-if(a>0){
-	 System.out.println("data inserted");
-}
 
+System.out.println("host registerd");
 
+PreparedStatement stmt=con.prepareStatement("Delete from serv.ser where name=?");
+stmt.setString(1, dd);
+response.sendRedirect("show.jsp");
 
-java.util.Date date=(Calendar.getInstance().getTime());
+//out.print("data deleted");
+stmt.executeUpdate();
 %>
-<b><%=fn%></b><%=date %>
-
-today is <%=date %>
-
-
-
-
 
 
 </body>
